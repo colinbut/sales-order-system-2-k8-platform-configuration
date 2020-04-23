@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customerservice-deployment
+spec:
+  selector:
+    matchLabels:
+      app: customerservice
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: customerservice
+    spec:
+      containers:
+      - name: customerservice
+        image: 066203203749.dkr.ecr.eu-west-2.amazonaws.com/customer-service:1.0.0-SNAPSHOT
+        ports:
+        - containerPorts: 8081
+        env:
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: customerservice-secret
+              key: spring.datasource.username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: customerservice-secret
+              key: spring.datasource.password
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: customerservice-secret
+              key: jwt.secret
+        volumeMounts:
+        - name:  app-config
+          mountPath: "/deployments/config"
+          readOnly: true
+      volumes:
+      - name: app-config
+        configMap:
+          name: customerservice-config
+          items:
+          - key: application.yml
+            path: application.yml
