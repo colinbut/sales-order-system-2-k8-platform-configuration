@@ -10,6 +10,17 @@ kubectl create configmap productservice-configmap \
 ## Create Secret
 
 ```bash
-kubectl create secret generic productservice-secret \
---from-literal=jwt.secret=[]
+kubectl create secret generic productservice-secret --from-literal=jwt.secret=[]
+```
+
+## Apply Deployment
+
+```bash
+kubectl apply -f productservice_deploy.yml
+```
+
+## Apply Service
+
+```bash
+kubectl apply -f productservice_svc.yml
 ```
