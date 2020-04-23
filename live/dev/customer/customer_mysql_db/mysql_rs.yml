@@ -23,7 +23,10 @@ spec:
               memory: 2Gi
           env:
           - name: MYSQL_ROOT_PASSWORD
-            value: password
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: mysql.root.password
           livenessProbe:
             tcpSocket:
               port: 3306
