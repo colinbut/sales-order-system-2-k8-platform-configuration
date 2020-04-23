@@ -19,11 +19,11 @@ kubectl create secret generic userservice-secret \
 ## Apply Deployment
 
 ```bash
-kubectl apply -f userservice-deploy.yml
+kubectl apply -f userservice_deploy.yml
 ```
 
 ## Apply Service
 
 ```bash
-kubectl apply -f userservice-svc,yml
+kubectl apply -f userservice_svc.yml
 ```
