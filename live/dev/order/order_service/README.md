@@ -10,8 +10,7 @@ kubectl create configmap orderservice-config --from-file=orderservice.properties
 ## Create Secret
 
 ```bash
-kubectl create secret generic orderservice-secret \
---from-literal=jwt.secret=[]
+kubectl create secret generic orderservice-secret --from-literal=jwt.secret=[]
 ```
 
 ## Apply Deployment

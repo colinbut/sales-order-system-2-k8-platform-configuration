@@ -1,4 +1,4 @@
-apiVersion: extensions/v1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: mysql
@@ -35,8 +35,8 @@ spec:
           volumeMounts:
             - name:  database-data-storage-location
               mountPath: "/var/lib/mysql"
-    volumes:
-    - name: database-data-storage-location
-      hostPath:
-        path: /var/lib/mysql
-        type: Directory
+      volumes:
+      - name: database-data-storage-location
+        hostPath:
+          path: /var/lib/mysql
+          type: Directory
