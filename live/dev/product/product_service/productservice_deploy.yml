@@ -20,19 +20,33 @@ spec:
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: prod
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: productservice-config
+              key: server.port
+        - name: JWT_ISSUER
+          valueFrom:
+            configMapKeyRef:
+              name: productservice-config
+              key: jwt.issuer
+        - name: SPRING_REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: productservice-config
+              key: spring.redis.host
+        - name: SPRING_REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: productservice-config
+              key: spring.redis.port
+        - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+          valueFrom:
+            configMapKeyRef:
+              name: productservice-config
+              key: management.endpoints.web.exposure.include
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
               name: productservice-secret
               key: jwt.secret
-        volumeMounts:
-        - name:  app-config
-          mountPath: "/deployments/config"
-          readOnly: true
-      volumes:
-      - name: app-config
-        configMap:
-          name: productservice-config
-          items:
-          - key: productservice.properties
-            path: productservice.properties
