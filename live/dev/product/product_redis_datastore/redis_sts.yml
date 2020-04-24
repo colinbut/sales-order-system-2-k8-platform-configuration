@@ -25,6 +25,8 @@ spec:
       - command: [sh, -c, source /redis-config-src/sentinel.sh]
         image:  redis:4.0.11-alpine
         name: sentinel
+        ports:
+        - containerPort: 26379
         volumeMounts:
         - mountPath: /redis-config-src
           name: config
@@ -35,10 +37,5 @@ spec:
           defaultMode: 420
           name: redis-config
         name: config
-      - emptyDir:
+      - emptyDir: {}
         name: data
-        volumeMounts:
-        - mountPath: /redis-config
-          name: config
-        - mountPath: /redis-data
-          name: data
