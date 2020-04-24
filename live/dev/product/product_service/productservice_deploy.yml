@@ -16,7 +16,7 @@ spec:
       - name: productservice
         image: 066203203749.dkr.ecr.eu-west-2.amazonaws.com/product-service:1.0.0-SNAPSHOT
         ports:
-        - containerPorts: 8083
+        - containerPort: 8083
         env:
         - name: JWT_SECRET
           valueFrom:
