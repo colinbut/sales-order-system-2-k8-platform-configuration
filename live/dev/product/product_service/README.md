@@ -3,14 +3,15 @@
 ## Create ConfigMap
 
 ```bash
-kubectl create configmap productservice-configmap \
---from-file=https://github.com/colinbut/sales-order-system-2-k8-platform-configuration/blob/master/live/dev/product/productservice.properties
+curl -O https://raw.githubusercontent.com/colinbut/sales-order-system-2-k8-platform-configuration/master/live/dev/product/productservice.properties
+kubectl create configmap productservice-config --from-file=productservice.properties
 ```
 
 ## Create Secret
 
 ```bash
-kubectl create secret generic productservice-secret --from-literal=jwt.secret=[]
+kubectl create secret generic productservice-secret \
+--from-literal=jwt.secret=userservice
 ```
 
 ## Apply Deployment
