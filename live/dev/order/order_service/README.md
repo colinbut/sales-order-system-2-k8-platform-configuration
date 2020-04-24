@@ -3,7 +3,7 @@
 ## Create ConfigMap
 
 ```bash
-kubectl apply -f orderservice-configmap.yml
+kubectl apply -f orderservice_configmap.yml
 ```
 
 ## Create Secret

@@ -33,14 +33,39 @@ spec:
             secretKeyRef:
               name: customerservice-secret
               key: jwt.secret
-        volumeMounts:
-        - name:  app-config
-          mountPath: "/deployments/config"
-          readOnly: true
-      volumes:
-      - name: app-config
-        configMap:
-          name: customerservice-config
-          items:
-          - key: customerservice.properties
-            path: customerservice.properties
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: customerservice-configmap
+              key: server.port
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: customerservice-configmap
+              key: spring.datasource.url
+        - name: SPRING_DATASOURCE_PLATFORM
+          valueFrom:
+            configMapKeyRef:
+              name: customerservice-configmap
+              key: spring.datasource.platform
+        - name: SPRING.DATASOURCE.INITIALIZATION-MODE
+          valueFrom:
+            configMapKeyRef:
+              name: customerservice-configmap
+              key: spring.datasource.initialization-mode
+        - name: SPRING_JPA_HIBERNATE_DDL-AUTO
+          valueFrom:
+            configMapKeyRef:
+              name: customerservice-configmap
+              key: spring.jpa.hibernate.ddl-auto
+        - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+          valueFrom:
+            configMapKeyRef:
+              name: customerservice-configmap
+              key: management.endpoints.web.exposure.include
+        - name: JWT_ISSUER
+          valueFrom:
+            configMapKeyRef:
+              name: customerservice-configmap
+              key: jwt.issuer
+        
