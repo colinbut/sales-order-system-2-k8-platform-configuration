@@ -16,7 +16,7 @@ spec:
       - name: userservice
         image: 066203203749.dkr.ecr.eu-west-2.amazonaws.com/user-service:1.0.0-SNAPSHOT
         ports:
-        - containerPorts: 8080
+        - containerPort: 8080
         env:
         - name: SPRING_DATASOURCE_USERNAME
           valueFrom:
@@ -42,5 +42,5 @@ spec:
         configMap:
           name: userservice-config
           items:
-          - key: application.yml
-            path: application.yml
+          - key: userservice.yml
+            path: userservice.yml
