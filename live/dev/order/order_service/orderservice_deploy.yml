@@ -24,27 +24,27 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: orderservice-config
-              key: SERVER_PORT
+              key: server.port
         - name: SPRING_DATA_MONGODB_HOST
           valueFrom:
             configMapKeyRef:
               name: orderservice-config
-              key: SPRING_DATA_MONGODB_HOST
+              key: spring.data.mongodb.host
         - name: SPRING_DATA_MONGODB_PORT
           valueFrom:
             configMapKeyRef:
               name: orderservice-config
-              key: SPRING_DATA_MONGODB_PORT
+              key: spring.data.mongodb.port
         - name: JWT_ISSUER
           valueFrom:
             configMapKeyRef:
               name: orderservice-config
-              key: JWT_ISSUER
+              key: jwt.issuer
         - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
           valueFrom:
             configMapKeyRef:
               name: orderservice-config
-              key: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+              key: management.endpoints.web.exposure.include
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
