@@ -3,8 +3,8 @@
 ## Create ConfigMap
 
 ```bash
-kubectl create configmap orderservice-configmap \
---from-file=https://github.com/colinbut/sales-order-system-2-k8-platform-configuration/blob/master/live/dev/order/orderservice.properties
+curl -O https://raw.githubusercontent.com/colinbut/sales-order-system-2-k8-platform-configuration/master/live/dev/order/orderservice.properties
+kubectl create configmap orderservice-config --from-file=orderservice.properties
 ```
 
 ## Create Secret
