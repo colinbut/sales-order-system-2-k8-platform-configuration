@@ -16,7 +16,7 @@ spec:
       - name: customerservice
         image: 066203203749.dkr.ecr.eu-west-2.amazonaws.com/customer-service:1.0.0-SNAPSHOT
         ports:
-        - containerPorts: 8081
+        - containerPort: 8081
         env:
         - name: SPRING_DATASOURCE_USERNAME
           valueFrom:
