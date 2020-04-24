@@ -8,3 +8,4 @@ spec:
     protocol: TCP
   selector:
     app: mysql
+  clusterIP: None

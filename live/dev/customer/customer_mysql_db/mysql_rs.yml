@@ -32,11 +32,11 @@ spec:
               port: 3306
           ports:
           - containerPort: 3306
-          volumeMounts:
-            - name:  database-data-storage-location
-              mountPath: "/var/lib/mysql"
-      volumes:
-      - name: database-data-storage-location
-        hostPath:
-          path: /var/lib/mysql
-          type: Directory
+          # volumeMounts:
+          #   - name:  database-data-storage-location
+          #     mountPath: "/var/lib/mysql"
+      # volumes:
+      # - name: database-data-storage-location
+      #   hostPath:
+      #     path: /var/lib/mysql
+      #     type: Directory
