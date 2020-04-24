@@ -14,10 +14,12 @@ spec:
     spec:
       containers:
       - name: productservice
-        image: 066203203749.dkr.ecr.eu-west-2.amazonaws.com/product-service:1.0.0-SNAPSHOT
+        image: 066203203749.dkr.ecr.eu-west-2.amazonaws.com/product-service:2.0.0-SNAPSHOT
         ports:
         - containerPort: 8083
         env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: prod
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
