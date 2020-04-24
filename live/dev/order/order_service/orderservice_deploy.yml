@@ -20,19 +20,33 @@ spec:
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: prod
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: orderservice-config
+              key: SERVER_PORT
+        - name: SPRING_DATA_MONGODB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: orderservice-config
+              key: SPRING_DATA_MONGODB_HOST
+        - name: SPRING_DATA_MONGODB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: orderservice-config
+              key: SPRING_DATA_MONGODB_PORT
+        - name: JWT_ISSUER
+          valueFrom:
+            configMapKeyRef:
+              name: orderservice-config
+              key: JWT_ISSUER
+        - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+          valueFrom:
+            configMapKeyRef:
+              name: orderservice-config
+              key: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
               name: orderservice-secret
               key: jwt.secret
-        volumeMounts:
-        - name:  app-config
-          mountPath: "/deployments/config"
-          readOnly: true
-      volumes:
-      - name: app-config
-        configMap:
-          name: orderservice-config
-          items:
-          - key: orderservice.properties
-            path: orderservice.properties
