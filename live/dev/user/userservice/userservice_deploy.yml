@@ -33,14 +33,3 @@ spec:
             secretKeyRef:
               name: userservice-secret
               key: jwt.secret
-        volumeMounts:
-        - name:  app-config
-          mountPath: "/deployments/config"
-          readOnly: true
-      volumes:
-      - name: app-config
-        configMap:
-          name: userservice-config
-          items:
-          - key: userservice.yml
-            path: userservice.yml
