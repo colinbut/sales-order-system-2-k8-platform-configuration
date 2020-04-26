@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderservice-deployment
+spec:
+  selector:
+    matchLabels:
+      app: orderservice
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: orderservice
+    spec:
+      containers:
+      - name: orderservice
+        image: 066203203749.dkr.ecr.eu-west-2.amazonaws.com/order-service:1.0.0-SNAPSHOT
+        ports:
+        - containerPort: 8082
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: prod
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: orderservice-config
+              key: server.port
+        - name: SPRING_DATA_MONGODB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: orderservice-config
+              key: spring.data.mongodb.host
+        - name: SPRING_DATA_MONGODB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: orderservice-config
+              key: spring.data.mongodb.port
+        - name: JWT_ISSUER
+          valueFrom:
+            configMapKeyRef:
+              name: orderservice-config
+              key: jwt.issuer
+        - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+          valueFrom:
+            configMapKeyRef:
+              name: orderservice-config
+              key: management.endpoints.web.exposure.include
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: orderservice-secret
+              key: jwt.secret
