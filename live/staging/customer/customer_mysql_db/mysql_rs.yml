@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - image: mysql
+          name: database
+          resources:
+            requests:
+              cpu: 1
+              memory: 2Gi
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: mysql.root.password
+          livenessProbe:
+            tcpSocket:
+              port: 3306
+          ports:
+          - containerPort: 3306
+          # volumeMounts:
+          #   - name:  database-data-storage-location
+          #     mountPath: "/var/lib/mysql"
+      # volumes:
+      # - name: database-data-storage-location
+      #   hostPath:
+      #     path: /var/lib/mysql
+      #     type: Directory

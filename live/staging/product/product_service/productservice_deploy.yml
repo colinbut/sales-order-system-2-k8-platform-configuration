@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productservice-deployment
+spec:
+  selector:
+    matchLabels:
+      app: productservice
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: productservice
+    spec:
+      containers:
+      - name: productservice
+        image: 066203203749.dkr.ecr.eu-west-2.amazonaws.com/product-service:2.0.0-SNAPSHOT
+        ports:
+        - containerPort: 8083
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: prod
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: productservice-config
+              key: server.port
+        - name: JWT_ISSUER
+          valueFrom:
+            configMapKeyRef:
+              name: productservice-config
+              key: jwt.issuer
+        - name: SPRING_REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: productservice-config
+              key: spring.redis.host
+        - name: SPRING_REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: productservice-config
+              key: spring.redis.port
+        - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+          valueFrom:
+            configMapKeyRef:
+              name: productservice-config
+              key: management.endpoints.web.exposure.include
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: productservice-secret
+              key: jwt.secret
