@@ -18,6 +18,8 @@ spec:
         ports:
         - containerPort: 8081
         env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: prod
         - name: SPRING_DATASOURCE_USERNAME
           valueFrom:
             secretKeyRef:
@@ -36,36 +38,36 @@ spec:
         - name: SERVER_PORT
           valueFrom:
             configMapKeyRef:
-              name: customerservice-configmap
+              name: customerservice-config
               key: server.port
         - name: SPRING_DATASOURCE_URL
           valueFrom:
             configMapKeyRef:
-              name: customerservice-configmap
+              name: customerservice-config
               key: spring.datasource.url
         - name: SPRING_DATASOURCE_PLATFORM
           valueFrom:
             configMapKeyRef:
-              name: customerservice-configmap
+              name: customerservice-config
               key: spring.datasource.platform
         - name: SPRING.DATASOURCE.INITIALIZATION-MODE
           valueFrom:
             configMapKeyRef:
-              name: customerservice-configmap
+              name: customerservice-config
               key: spring.datasource.initialization-mode
         - name: SPRING_JPA_HIBERNATE_DDL-AUTO
           valueFrom:
             configMapKeyRef:
-              name: customerservice-configmap
+              name: customerservice-config
               key: spring.jpa.hibernate.ddl-auto
         - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
           valueFrom:
             configMapKeyRef:
-              name: customerservice-configmap
+              name: customerservice-config
               key: management.endpoints.web.exposure.include
         - name: JWT_ISSUER
           valueFrom:
             configMapKeyRef:
-              name: customerservice-configmap
+              name: customerservice-config
               key: jwt.issuer
         
